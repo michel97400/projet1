@@ -1,0 +1,20 @@
+# Ignorer les fichiers compilés
+*.class
+*.o
+*.exe
+
+# Ignorer les fichiers temporaires
+*.log
+*.tmp
+*.swp
+.DS_Store
+
+# Ignorer les dossiers de build
+/dist
+/build
+/node_modules
+
+# Ignorer les fichiers de configuration locaux
+.env
+.vscode/
+.idea/
