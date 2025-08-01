@@ -1,0 +1,51 @@
+.headernav {
+    background-color: blue;
+    display: flex;
+    justify-content:space-around;
+}
+
+h1 {
+    color: aliceblue;
+}
+
+.nav-link {
+    color: aliceblue;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
+
+
+.foot {
+    background-color: blue;
+    color: aliceblue;
+    text-align: center;
+    padding: 30px;
+}
+
+.main {
+    height: 100vh;
+}
+
+.main-text {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 100px;
+}
+
+.buttonexplorer {
+    margin: auto;
+    width: 200px;
+    border-radius: 20px;
+    margin-top: 100px;
+    box-shadow: 2px 2px 2px #555;
+}
+
+.connect {
+    background-color: aliceblue;
+    border-radius: 20px;
+}
