@@ -7,6 +7,8 @@ import HeaderComposant from './component/headerNav';
 import Accueil from './page/accueilPage';
 import Boutique from './page/boutiquePage';
 import Footer from './component/footerComponent';
+import Login from './page/loginPage';
+import Register from './page/registerPage';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +20,9 @@ function App() {
         <Routes>
             <Route path="/" element={<Accueil />} />
             <Route path="/boutique" element={<Boutique />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
         </Routes>
 
         <Footer />
