@@ -1,13 +1,17 @@
-
-
+import * as z from "zod";
 import { useState } from 'react';
 import { User, Lock, Eye, EyeOff } from 'lucide-react';
+import LoginSchema from "../component/schemaLogin";
+
 
 function Login() {
+    
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+
+    const [errors, setErrors] = useState({});
     const [showPassword, setShowPassword] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -21,13 +25,27 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        const result = LoginSchema.safeParse(formData);
         
-        // Simulation d'une requête de connexion
-        setTimeout(() => {
-            console.log('Données de connexion:', formData);
-            setIsLoading(false);
-            // Ici vous ajouteriez votre logique de connexion
-        }, 1500);
+         if (!result.success) {
+        const rawErrors = result.error.issues;
+        const fieldErrors = {};
+
+        rawErrors.forEach((issue) => {
+        const field = issue.path[0];
+        if (!fieldErrors[field]) {
+            fieldErrors[field] = issue.message;
+        }
+        });
+
+        setErrors(fieldErrors);
+
+        } else {
+            setErrors({});
+            setIsLoading(false)
+            console.log("✅ Données valides :", result.data);
+            // Appel backend ici
+        }
     };
 
     const togglePasswordVisibility = () => {
@@ -57,7 +75,11 @@ function Login() {
                                 placeholder="votre.email@exemple.com"
                                 required
                             />
+                             
                         </div>
+                        {errors.email && (
+                            <p className="input-error text-danger fw-bold">{errors.email}</p>
+                        )}
                     </div>
 
                     {/* Champ Mot de passe */}
@@ -74,6 +96,7 @@ function Login() {
                                 placeholder="••••••••"
                                 required
                             />
+                            
                             <button
                                 type="button"
                                 className="password-toggle"
@@ -81,7 +104,11 @@ function Login() {
                             >
                                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                             </button>
+                            
                         </div>
+                        {errors.password && (
+                            <p className="input-error text-danger fw-bold">{errors.password}</p>
+                        )}
                     </div>
 
                     {/* Options */}

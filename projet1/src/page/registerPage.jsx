@@ -1,9 +1,10 @@
 
-
+import FormSchema from '../component/schemaLogin';
 import { useState } from 'react';
 import { User, Mail, Lock, Eye, EyeOff, Phone, Calendar, Check, X } from 'lucide-react';
 
 function Register() {
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -22,71 +23,6 @@ function Register() {
     const [errors, setErrors] = useState({});
     const [passwordStrength, setPasswordStrength] = useState(0);
 
-    // Validation en temps réel
-    const validateField = (name, value) => {
-        const newErrors = { ...errors };
-
-        switch (name) {
-            case 'firstName':
-            case 'lastName':
-                if (value.length < 2) {
-                    newErrors[name] = 'Minimum 2 caractères';
-                } else {
-                    delete newErrors[name];
-                }
-                break;
-            case 'email':
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(value)) {
-                    newErrors[name] = 'Email invalide';
-                } else {
-                    delete newErrors[name];
-                }
-                break;
-            case 'phone':
-                const phoneRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
-                if (value && !phoneRegex.test(value)) {
-                    newErrors[name] = 'Numéro de téléphone invalide';
-                } else {
-                    delete newErrors[name];
-                }
-                break;
-            case 'password':
-                if (value.length < 8) {
-                    newErrors[name] = 'Minimum 8 caractères';
-                } else {
-                    delete newErrors[name];
-                }
-                // Calcul de la force du mot de passe
-                let strength = 0;
-                if (value.length >= 8) strength += 1;
-                if (/[A-Z]/.test(value)) strength += 1;
-                if (/[a-z]/.test(value)) strength += 1;
-                if (/[0-9]/.test(value)) strength += 1;
-                if (/[^A-Za-z0-9]/.test(value)) strength += 1;
-                setPasswordStrength(strength);
-                break;
-            case 'confirmPassword':
-                if (value !== formData.password) {
-                    newErrors[name] = 'Les mots de passe ne correspondent pas';
-                } else {
-                    delete newErrors[name];
-                }
-                break;
-            case 'birthDate':
-                const today = new Date();
-                const birth = new Date(value);
-                const age = today.getFullYear() - birth.getFullYear();
-                if (age < 13) {
-                    newErrors[name] = 'Vous devez avoir au moins 13 ans';
-                } else {
-                    delete newErrors[name];
-                }
-                break;
-        }
-
-        setErrors(newErrors);
-    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;

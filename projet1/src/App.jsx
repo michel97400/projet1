@@ -9,6 +9,8 @@ import Boutique from './page/boutiquePage';
 import Footer from './component/footerComponent';
 import Login from './page/loginPage';
 import Register from './page/registerPage';
+import Users from './page/usersPage';
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,10 +24,9 @@ function App() {
             <Route path="/boutique" element={<Boutique />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
+            <Route path='/users' element={<Users />} />
         </Routes>
 
-        <Footer />
       </BrowserRouter>
   )
 }
